@@ -1,4 +1,4 @@
-name: 'build and deploy Speckle functions'
+name: 'deploy'
 on:
   workflow_dispatch:
   push:
@@ -6,27 +6,12 @@ on:
       - '*'
 
 jobs:
-  publish-automate-function-version: # make sure the action works on a clean machine without building
+  publish-function: # make sure the action works on a clean machine without building
     env:
-      FUNCTION_SCHEMA_FILE_NAME: functionSchema.json
+      FUNCTION_SCHEMA_FILE_NAME: schema.json
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.7
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install poetry
-        run: |
-          pip install poetry==1.8.4 &&
-          poetry config virtualenvs.create false &&
-          poetry config virtualenvs.in-project false &&
-          poetry config installer.parallel true
-      - name: Restore dependencies
-        run: poetry install --no-root
-      - name: Extract functionInputSchema
-        id: extract_schema
-        run: |
-          python main.py generate_schema ${HOME}/${{ env.FUNCTION_SCHEMA_FILE_NAME }}
       - name: Speckle Automate Function - Build and Publish
         uses: specklesystems/speckle-automate-github-composite-action@0.8.1
         with:
@@ -34,4 +19,4 @@ jobs:
           speckle_token: ${{ secrets.SPECKLE_FUNCTION_TOKEN }}
           speckle_function_id: ${{ secrets.SPECKLE_FUNCTION_ID }}
           speckle_function_input_schema_file_path: ${{ env.FUNCTION_SCHEMA_FILE_NAME }}
-          speckle_function_command: 'python -u main.py run'
+          speckle_function_command: 'node bin/app.js'

@@ -1,0 +1,25 @@
+{
+  "name": "speckle-typescript-function",
+  "version": "1.0.0",
+  "description": "This template repository is for a Speckle Automate function written in Python\r using the [specklepy](https://pypi.org/project/specklepy/) SDK to interact with Speckle data.",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "bundle": "node esbuild.mjs",
+    "start": "node bin/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@speckle/objectloader": "^2.23.10",
+    "@speckle/objectsender": "^2.23.10",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/yargs": "^17.0.33",
+    "esbuild": "0.25.1",
+    "typescript": "^5.8.2"
+  },
+  "keywords": [],
+  "author": ""
+}
