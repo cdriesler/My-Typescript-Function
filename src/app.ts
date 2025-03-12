@@ -1,25 +1,22 @@
 import { readFileSync } from 'node:fs'
-import yargs from 'yargs'
+import { FunctionInputs } from './schema'
+import ObjectLoader from '@speckle/objectloader'
 
-const [inputDataPath] = process.argv.slice(2)
-const {
-    functionInputs,
-    automationRunData,
-    speckleToken
-} = JSON.parse(readFileSync(inputDataPath, 'utf-8'))
-const {
-    speckleServerUrl,
-    automationId,
-    projectId,
-    automationRunId,
-    triggers,
-    functionRunId
-} = automationRunData
+const getAutomationContext = (): FunctionRunData<FunctionInputs> => {
+    const [inputDataPath] = process.argv.slice(2)
+    return JSON.parse(readFileSync(inputDataPath, 'utf-8'))
+}
+
+const getVersionId = (context: AutomationRunData): string => {
+    return context.triggers.at(0)?.payload.versionId ?? ''
+}
+
+const { functionInputs, automationRunData, speckleToken } = getAutomationContext()
+
+const versionId = getVersionId(automationRunData)
 
 // const data = JSON.parse(readFileSync('/speckle/automate.json', 'utf-8'))
 
 console.log(functionInputs)
-console.log(speckleServerUrl)
-console.log(triggers)
-console.log(speckleToken)
+console.log(versionId)
 
