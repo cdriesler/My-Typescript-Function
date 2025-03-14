@@ -18,11 +18,10 @@ const versionId = getVersionId(automationRunData)
 console.log(functionInputs)
 console.log(versionId)
 
-getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId).then((res) => {
-    console.log(res)
-}).finally(() => {
-    process.exit()
-})
+getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId)
+    .then((res) => {
+        console.log(res)
+    })
 
 // const data = JSON.parse(readFileSync('/speckle/automate.json', 'utf-8'))
 

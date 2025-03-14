@@ -5,7 +5,7 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
     const operationName = "GetProjectVersion"
 
     const query = print(gql`
-        query ${operationName} ($projectId: String!, versionId: String!) {
+        query ${operationName} ($projectId: String!, $versionId: String!) {
             project(id: $projectId) {
                 version(id: $versionId) {
                     id
