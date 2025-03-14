@@ -18,7 +18,9 @@ const versionId = getVersionId(automationRunData)
 console.log(functionInputs)
 console.log(versionId)
 
-getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId).finally(() => {
+getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId).then((res) => {
+    console.log(res)
+}).finally(() => {
     process.exit()
 })
 
