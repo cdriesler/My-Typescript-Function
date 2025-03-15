@@ -15,7 +15,7 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
         }
         `)
 
-    console.log('post-response')
+    console.log(speckleServerUrl)
 
     const response = await fetch(
         `${speckleServerUrl}/graphql`,
@@ -36,6 +36,8 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
         })
 
     console.log('post-response')
+
+    console.log(await response.text())
 
     const { data, errors } = await response.json()
 
