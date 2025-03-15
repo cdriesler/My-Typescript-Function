@@ -36,7 +36,7 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
 
     const { data, errors } = await response.json()
 
-    if (errors.length > 0) {
+    if (errors?.length > 0) {
         console.log(errors)
     }
 
