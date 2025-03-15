@@ -18,7 +18,7 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
     console.log(speckleServerUrl)
 
     const response = await fetch(
-        `${speckleServerUrl}/graphql`,
+        `${speckleServerUrl}graphql`,
         {
             method: 'POST',
             body: JSON.stringify({
