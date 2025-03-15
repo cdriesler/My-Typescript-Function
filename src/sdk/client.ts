@@ -30,7 +30,8 @@ export const getVersion = async (speckleServerUrl: string, speckleToken: string,
                 }
             }),
             headers: {
-                Authorization: `Bearer ${speckleToken}`
+                Authorization: `Bearer ${speckleToken}`,
+                "Content-Type": "application/json"
             }
         })
 
