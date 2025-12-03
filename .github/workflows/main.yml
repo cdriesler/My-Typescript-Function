@@ -11,7 +11,7 @@ jobs:
       FUNCTION_SCHEMA_FILE_NAME: schema.json
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: actions/checkout@v6.0.1
       - run: cp ${{ env.FUNCTION_SCHEMA_FILE_NAME }} ${HOME}/${{ env.FUNCTION_SCHEMA_FILE_NAME }}
       - name: Speckle Automate Function - Build and Publish
         uses: specklesystems/speckle-automate-github-composite-action@0.8.1
