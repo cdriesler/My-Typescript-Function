@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { FunctionInputs } from './schema'
 import { getVersion } from './sdk/client'
-import ObjectLoader from '@speckle/objectloader'
+import { ObjectLoader2Factory } from '@speckle/objectloader2'
+import { AutomationRunData, FunctionRunData } from '@/sdk/types'
 
 const getAutomationContext = (): FunctionRunData<FunctionInputs> => {
     const [inputDataPath] = process.argv.slice(2)
@@ -19,21 +20,18 @@ const versionId = getVersionId(automationRunData)
 console.log(functionInputs)
 console.log(versionId)
 
-getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId)
-    .then((res) => {
-        console.log(res)
+const res = await getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId)
 
-        const loader = new ObjectLoader({
-            serverUrl: automationRunData.speckleServerUrl,
-            streamId: automationRunData.projectId,
-            objectId: res.referencedObject,
-            token: speckleToken
-        })
+const loader = ObjectLoader2Factory.createFromUrl({
+    serverUrl: automationRunData.speckleServerUrl,
+    streamId: automationRunData.projectId,
+    objectId: res.referencedObject,
+    token: speckleToken
+})
 
-        for (const obj of loader.getObjectIterator()) {
-            console.log(obj)
-        }
-    })
+for await (const obj of loader.getObjectIterator()) {
+    console.log(obj)
+}
 
 
 

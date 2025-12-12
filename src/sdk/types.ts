@@ -1,11 +1,10 @@
-
-type FunctionRunData<FunctionInputs extends Record<string, unknown>> = {
+export type FunctionRunData<FunctionInputs extends Record<string, unknown>> = {
     functionInputs: FunctionInputs
     automationRunData: AutomationRunData
     speckleToken: string
 }
 
-type AutomationRunData = {
+export type AutomationRunData = {
     speckleServerUrl: string
     automationId: string
     projectId: string
@@ -14,7 +13,7 @@ type AutomationRunData = {
     triggers: AutomationRunTrigger[]
 }
 
-type AutomationRunTrigger =
+export type AutomationRunTrigger =
     | {
         triggerType: 'versionCreation'
         payload: {
