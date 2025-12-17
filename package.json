@@ -11,6 +11,7 @@
   "dependencies": {
     "@speckle/objectloader2": "^2.26.8",
     "@speckle/objectsender": "^2.26.8",
+    "fake-indexeddb": "^6.2.5",
     "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6"
   },

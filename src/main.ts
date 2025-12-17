@@ -26,7 +26,10 @@ const loader = ObjectLoader2Factory.createFromUrl({
     serverUrl: automationRunData.speckleServerUrl,
     streamId: automationRunData.projectId,
     objectId: res.referencedObject,
-    token: speckleToken
+    token: speckleToken,
+    options: {
+        useCache: false
+    }
 })
 
 for await (const obj of loader.getObjectIterator()) {
