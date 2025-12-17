@@ -13,6 +13,10 @@ const getVersionId = (context: AutomationRunData): string => {
     return context.triggers.at(0)?.payload.versionId ?? ''
 }
 
+const sanitizeUrl = (serverUrl: string): string => {
+    return serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl
+}
+
 const { functionInputs, automationRunData, speckleToken } = getAutomationContext()
 
 console.log(functionInputs)
@@ -26,7 +30,7 @@ const res = await getVersion(automationRunData.speckleServerUrl, speckleToken, a
 console.log(res)
 
 const loader = ObjectLoader2Factory.createFromUrl({
-    serverUrl: automationRunData.speckleServerUrl,
+    serverUrl: sanitizeUrl(automationRunData.speckleServerUrl),
     streamId: automationRunData.projectId,
     objectId: res.referencedObject,
     token: speckleToken,
