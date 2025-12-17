@@ -15,12 +15,15 @@ const getVersionId = (context: AutomationRunData): string => {
 
 const { functionInputs, automationRunData, speckleToken } = getAutomationContext()
 
-const versionId = getVersionId(automationRunData)
-
 console.log(functionInputs)
+console.log(automationRunData)
+console.log(speckleToken)
+
+const versionId = getVersionId(automationRunData)
 console.log(versionId)
 
 const res = await getVersion(automationRunData.speckleServerUrl, speckleToken, automationRunData.projectId, versionId)
+console.log(res)
 
 const loader = ObjectLoader2Factory.createFromUrl({
     serverUrl: automationRunData.speckleServerUrl,
